@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="InboundReqeust" type="InboundRequest"/>
+    <xsd:complexType name="InboundRequest">
+    	<xsd:sequence>
+    		<xsd:element name="customerName" type="xsd:string"></xsd:element>
+    		<xsd:element name="swiftCode" type="xsd:string"></xsd:element>
+    		<xsd:element name="IBAN" type="xsd:string"></xsd:element>
+    		<xsd:element name="currency" type="xsd:string"></xsd:element>
+    		<xsd:element name="amount" type="xsd:float"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

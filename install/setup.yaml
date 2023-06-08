@@ -1,0 +1,89 @@
+
+# After applying this with the oc command, 
+# 1. get the entitlement key https://myibm.ibm.com/products-services/containerlibrary
+# 2. update OCP with the userid and entitlement key using the command "oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=ENTITLEMENT_KEY --docker-email=OCP_LOGIN_CREDENTIALS"
+---
+apiVersion: project.openshift.io/v1
+description: "Cloud Pak for Integration"
+displayName: demo
+kind: ProjectRequest
+metadata:
+    name: demo
+---
+# IBM Operator Catalog
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: ibm-operator-catalog
+  namespace: openshift-marketplace
+spec:
+  displayName: ibm-operator-catalog 
+  publisher: IBM Content
+  sourceType: grpc
+  image: icr.io/cpopen/ibm-operator-catalog
+  updateStrategy:
+    registryPoll:
+      interval: 45m
+---
+# Creates the necessary security for the Operator under the mq namespace
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: ibm-integration-operatorgrou
+  namespace: demo
+spec:
+  targetNamespaces:
+  - demo
+---
+# Install the necessary operators
+# Platform Navigator
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-integration-platform-navigator
+  namespace: demo
+spec:
+  channel: v7.0
+  installPlanApproval: Automatic
+  name: ibm-integration-platform-navigator
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+---
+# IBM MQ
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-mq
+  namespace: demo
+spec:
+  channel: v2.3
+  installPlanApproval: Automatic
+  name: ibm-mq
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+---
+# App Connect
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ibm-appconnect
+  namespace: demo
+spec:
+  channel: v8.1
+  installPlanApproval: Automatic
+  name: ibm-appconnect
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+---
+# install WAS Liberty Operator
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: was-liberty
+  namespace: demo
+spec:
+  installPlanApproval: Automatic
+  name: ibm-websphere-liberty
+  source: ibm-operator-catalog
+  sourceNamespace: openshift-marketplace
+...

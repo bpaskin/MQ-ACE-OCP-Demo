@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: Generated API
+  version: "1.0"
+servers:
+- url: http://fake-olm-app:9080/FakeOLM
+paths:
+  /services/authenticate/{name}:
+    get:
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Outgoing'
+    post:
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Outgoing'
+components:
+  schemas:
+    Outgoing:
+      type: object
+      properties:
+        message:
+          type: string
+        auhhorized:
+          type: boolean
