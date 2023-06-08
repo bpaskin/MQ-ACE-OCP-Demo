@@ -8,7 +8,7 @@ oc apply -f install/setup.yaml
 ```
 2. Add your [entitlement key](https://myibm.ibm.com/products-services/containerlibrary):
 ```
-oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password={entitlement key}
+oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password={entitlement key} -n demo
 ```
 3. Update the `install/create-instances.yam`l with the correct storage classes for MQ and ACE
 4. Create the the Platform Navigator, BuildConfigs, and instances of the Liberty, MQ, and ACE
