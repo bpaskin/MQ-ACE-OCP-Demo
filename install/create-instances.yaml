@@ -527,4 +527,10 @@ spec:
       target:
         type: Utilization
         averageUtilization: 40
+  behavior:
+    scaleDown:
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
 ...
