@@ -306,7 +306,7 @@ spec:
       name: bank-client-app:latest
   triggers:
      - type: ImageChange
-       imagechange: {}
+       imageChange: {}
      - type: GitHub
        github:
           secretReference:
@@ -341,7 +341,7 @@ spec:
       name: bank-auth-app:latest
   triggers:
      - type: ImageChange
-       imagechange: {}
+       imageChange: {}
      - type: GitHub
        github:
           secretReference:
@@ -496,7 +496,7 @@ spec:
       name: banknet-app:latest
   triggers:
      - type: ImageChange
-       imagechange: {}
+       imageChange: {}
      - type: GitHub
        github:
           secretReference:
