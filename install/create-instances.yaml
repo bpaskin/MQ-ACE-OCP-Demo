@@ -367,6 +367,22 @@ spec:
    networkPolicy:
     disable: true
 ---
+# Create variables for Bank Client to pull in
+apiVersion: v1
+kind: Secret
+metadata:
+   name: bank-client-vars
+   namespace: demo
+stringData:
+   MQ.HOST: "banknet-qm-ibm-mq"
+   MQ.PORT: "1414"
+   MQ.CHANNEL: "EXTERNAL.SVRCONN"
+   MQ.CIPHERSUITE: "*TLS12"
+   MQ.INBOUND.Q: "IN.Q"
+   MQ.OUTBOUND.Q: "OUT.Q"
+   MQ.QMGR: "BANKNET"
+   MQ.EXPIRY: "30000"
+---
 # Bank Client is the entry into the app
 apiVersion: liberty.websphere.ibm.com/v1
 kind: WebSphereLibertyApplication
@@ -392,8 +408,16 @@ spec:
     targetCPUUtilizationPercentage: 50
   applicationName: BankClient
   pullPolicy: Always
+  volumeMounts:
+  - mountPath: /config/variables/
+    name: variables
+    readOnly: true
+  volumes:
+  - name: variables
+    secret:
+      secretName: bank-client-vars
 ---
-# Bank Client is the entry into the app
+# Bank Auth is the entry into the app
 apiVersion: liberty.websphere.ibm.com/v1
 kind: WebSphereLibertyApplication
 metadata:
