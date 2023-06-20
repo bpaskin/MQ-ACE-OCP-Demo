@@ -65,7 +65,7 @@ spec:
     storage:
       size: 10Gi
       type: persistent-claim
-      class: thin-csi
+      class: ocs-storagecluster-cephfs
     replicas: 1
   designerMappingAssist:
     incrementalLearning:
