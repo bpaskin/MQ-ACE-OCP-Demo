@@ -43,7 +43,7 @@ metadata:
   name: ibm-integration-platform-navigator
   namespace: demo
 spec:
-  channel: v7.0
+  channel: v7.1
   installPlanApproval: Automatic
   name: ibm-integration-platform-navigator
   source: ibm-operator-catalog
@@ -69,7 +69,7 @@ metadata:
   name: ibm-appconnect
   namespace: demo
 spec:
-  channel: v8.1
+  channel: v8.2
   installPlanApproval: Automatic
   name: ibm-appconnect
   source: ibm-operator-catalog
