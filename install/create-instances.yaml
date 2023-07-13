@@ -11,7 +11,7 @@ spec:
       license: L-RJON-CJR2RX
    mqdashboard: true
    replicas: 1
-   version: 2022.4.1
+   version: 2023.2.1
    storage:
      class: 'ocs-storagecluster-cephfs'
 ---
