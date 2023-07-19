@@ -56,7 +56,7 @@ metadata:
   name: ibm-mq
   namespace: demo
 spec:
-  channel: v2.3
+  channel: v2.4
   installPlanApproval: Automatic
   name: ibm-mq
   source: ibm-operator-catalog
