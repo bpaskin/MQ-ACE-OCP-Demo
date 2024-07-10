@@ -18,11 +18,13 @@ apiVersion: appconnect.ibm.com/v1beta1
 kind: Dashboard
 metadata:
   name: ace-dashboard
+  labels:
+    backup.appconnect.ibm.com/component: dashboard
   namespace: demo
 spec:
   license:
     accept: true
-    license: L-MJTK-WUU8HE
+    license: L-XRNH-47FJAW
     use: CloudPakForIntegrationNonProduction
   pod:
     containers:
@@ -40,24 +42,34 @@ spec:
           requests:
             cpu: 50m
             memory: 125Mi
+  authentication:
+    integrationKeycloak:
+      enabled: true
+  authorization:
+    integrationKeycloak:
+      enabled: true
+  api:
+    enabled: true
   storage:
     size: 5Gi
     type: persistent-claim
     class: ocs-storagecluster-cephfs
   replicas: 1
-  useCommonServices: true
-  version: 12.0.8
+  displayMode: IntegrationRuntimes
+  version: 12.0.12
 ---
 # ACE Designer
 apiVersion: appconnect.ibm.com/v1beta1
 kind: DesignerAuthoring
 metadata:
   name: ace-designer
+  labels:
+    backup.appconnect.ibm.com/component: designerauthoring
   namespace: demo
 spec:
   license:
     accept: true
-    license: L-MJTK-WUU8HE
+    license: L-XRNH-47FJAW
     use: CloudPakForIntegrationNonProduction
   couchdb:
     storage:
@@ -69,10 +81,15 @@ spec:
     incrementalLearning:
       schedule: Every 15 days
     enabled: true
+  authentication:
+    integrationKeycloak:
+      enabled: true
+  authorization:
+    integrationKeycloak:
+      enabled: true
   designerFlowsOperationMode: local
   replicas: 1
-  useCommonServices: true
-  version: 12.0.8
+  version: 12.0.12
 ---
 # create MQ secrets for the key/trust store
 kind: Secret
@@ -108,11 +125,11 @@ metadata:
 spec:
   license:
     accept: true
-    license: L-RJON-CJR2RX
+    license: L-JTPV-KYG8TF
     use: NonProduction
   web:
     enabled: true
-  version: 9.3.2.1-r2
+  version: 9.4.0.0-r1
   template:
     pod:
       containers:
@@ -151,11 +168,11 @@ metadata:
 spec:
   license:
     accept: true
-    license: L-RJON-CJR2RX
+    license: L-JTPV-KYG8TF
     use: NonProduction
   web:
     enabled: true
-  version: 9.3.2.1-r2
+  version: 9.4.0.0-r1
   template:
     pod:
       containers:
@@ -514,7 +531,7 @@ spec:
     toolkitFlow: true
   license:
     accept: true
-    license: L-MJTK-WUU8HE
+    license: L-QECF-MBXVLU
     use: CloudPakForIntegrationProduction
   template:
     spec:
@@ -527,7 +544,7 @@ spec:
             requests:
               cpu: 300m
               memory: 368Mi
-  version: 12.0.8.0-r1
+  version: 12.0.12.0-r1
 ---
 # Horitizal Scaling
 apiVersion: autoscaling/v2
