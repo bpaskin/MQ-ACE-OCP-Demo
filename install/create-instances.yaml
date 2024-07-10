@@ -12,8 +12,6 @@ spec:
    mqdashboard: true
    replicas: 1
    version: 16.1.0
-   storage:
-     class: 'ocs-storagecluster-cephfs'
 ---
 # Create ACE Dashboard
 apiVersion: appconnect.ibm.com/v1beta1
