@@ -8,10 +8,10 @@ metadata:
 spec:
    license: 
       accept: true
-      license: L-RJON-CJR2RX
+      license: L-JTPV-KYG8TF
    mqdashboard: true
    replicas: 1
-   version: 2023.2.1
+   version: 16.1.0
    storage:
      class: 'ocs-storagecluster-cephfs'
 ---
