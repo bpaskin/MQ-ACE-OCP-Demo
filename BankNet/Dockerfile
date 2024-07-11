@@ -1,4 +1,4 @@
-FROM cp.icr.io/cp/appc/ace-server-prod@sha256:c41154c17a30bbbb6e1e4593c965f49ef3c86260e71143b8f33a6fbca277a3b9
+FROM cp.icr.io/cp/appc/ace-server-prod@sha256:77bc219596615b3b9e531867c20a008233e87e9ccf9da2148512501c860f0070
 
 USER root
 WORKDIR /opt/ibm
