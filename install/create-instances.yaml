@@ -531,7 +531,7 @@ spec:
     toolkitFlow: true
   license:
     accept: true
-    license: L-QECF-MBXVLU
+    license: L-XRNH-47FJAW
     use: CloudPakForIntegrationProduction
   template:
     spec:
@@ -544,7 +544,7 @@ spec:
             requests:
               cpu: 300m
               memory: 368Mi
-  version: 12.0.12.0-r1
+  version: 12.0.12.3-r1
 ---
 # Horitizal Scaling
 apiVersion: autoscaling/v2
