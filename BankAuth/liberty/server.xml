@@ -1,0 +1,31 @@
+<server description="Bank Client">
+
+    <featureManager>
+		<feature>wmqJmsClient-2.0</feature>
+		<feature>jsonb-1.0</feature>
+		<feature>cdi-2.0</feature>
+                <feature>mdb-3.2</feature>
+                <feature>servlet-4.0</feature>
+    </featureManager>
+
+    <variable name="wmqJmsClient.rar.location" value="${server.config.dir}/lib/wmq.jmsra.rar"/>
+   
+    <jmsConnectionFactory jndiName="jms/Bank">
+    	<properties.wmqJms applicationName="BankAuth" channel="${MQ.CHANNEL}" hostName="${MQ.HOST}" port="${MQ.PORT}" queueManager="${MQ.QMGR}" />
+    	<connectionManager agedTimeout="-1" connectionTimeout="3s" maxIdleTime="300s" maxPoolSize="100" reapTime="180s" minPoolSize="0"/>
+    </jmsConnectionFactory>
+    
+    <jmsQueue jndiName="jms/InQ" id="InQ">
+    	<properties.wmqJms baseQueueName="${MQ.INBOUND.Q}"/>
+    </jmsQueue>    
+    
+    <jmsQueue jndiName="jms/OutQ">
+    	<properties.wmqJms baseQueueName="${MQ.OUTBOUND.Q}" expiry="${MQ.EXPIRY}"/>
+    </jmsQueue>  
+
+    <jmsActivationSpec id="BankAuth-1.0/GetMessages">
+    	<properties.wmqJms channel="${MQ.CHANNEL}" hostName="${MQ.HOST}" port="${MQ.PORT}" queueManager="${MQ.QMGR}" destinationRef="InQ"/>
+    </jmsActivationSpec>
+ 
+    <webApplication location="BankAuth-1.0.war" />
+</server>

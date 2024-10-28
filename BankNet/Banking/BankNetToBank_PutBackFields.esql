@@ -1,0 +1,30 @@
+
+
+CREATE COMPUTE MODULE BankNetToBank_PutBackFields
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		-- Use MQ message features that were saved in the original message
+		SET OutputRoot.MQMD = Environment.MQMD;
+		SET OutputRoot.MQRFH2 = Environment.MQRHF2;
+		SET OutputRoot.BLOB = Environment.BLOB;
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
